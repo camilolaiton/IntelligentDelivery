@@ -69,8 +69,6 @@ export default function Checkout(props) {
   const delivery = props.location.state.delivery;
   const user = props.location.state.user;
 
-  console.log("USER: ", user);
-
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };

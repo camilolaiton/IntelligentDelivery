@@ -49,8 +49,6 @@ controller.getClientByUsername = async (req, res) => {
 
     var query_state = true;
 
-    console.log(req.params);
-
     const data = await user.findAll({
         include: [userType],
         limit: 1,

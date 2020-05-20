@@ -45,14 +45,14 @@ const DeliveryList = (props) => {
             <React.Fragment>
                 <CssBaseline />
                 <Container>
-                    <Grid container direction="row" justify="left" alignItems="center">
+                    <Grid container direction="row" justify="flex-start" alignItems="flex-start">
                         <Typography component="h1" variant="overline" align="left" style={{marginTop: 10,}}>
                             <Box fontWeight="fontWeightMedium" fontSize={20} letterSpacing={6}>
                                 Lista de domicilios
                             </Box>
                         </Typography>
                     </Grid>
-                    <Grid container direction="row" justify="left" alignItems="center">
+                    <Grid container direction="row" justify="flex-start" alignItems="flex-start">
                         <Grid item xs={6}>
                             <FormControl fullWidth>
                                 <Input
@@ -89,14 +89,14 @@ const DeliveryList = (props) => {
         <React.Fragment>
             <CssBaseline />
             <Container>
-                <Grid container direction="row" justify="left" alignItems="center">
+                <Grid container direction="row" justify="flex-start" alignItems="flex-start">
                     <Typography component="h1" variant="overline" align="left" style={{marginTop: 10,}}>
                         <Box fontWeight="fontWeightMedium" fontSize={20} letterSpacing={6}>
                             Lista de domicilios
                         </Box>
                     </Typography>
                 </Grid>
-                <Grid container direction="row" justify="left" alignItems="center">
+                <Grid container direction="row" justify="flex-start" alignItems="flex-start">
                     <Grid item xs={6}>
                         <FormControl fullWidth>
                             <Input

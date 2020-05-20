@@ -72,7 +72,7 @@ const styles = {
     color: red[500],
   },
   dialog: {
-    backgroundColor: fade(red[500], 0.15),
+    backgroundColor: fade(red[500], 0.40),
     borderRadius: 3,
     border: 0,
   },

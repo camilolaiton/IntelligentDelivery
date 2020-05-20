@@ -33,7 +33,7 @@ controller.getDeliveries = async (req, res) => {
 controller.getUserDeliveries = async (req, res) => {
 
     var query_state = true;
-    const user_id = req.body;
+    const user_id = req.params.iduser;
 
     const data = await delivery.findAll({
         include: [

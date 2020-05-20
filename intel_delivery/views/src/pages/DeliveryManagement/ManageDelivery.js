@@ -14,18 +14,15 @@ class ManageDelivery extends Component {
             user: this.props.location.state.user
         }
 
-        console.log("FROM props: ",this.props.location.state.user);
-        console.log("FROM state: ", this.state.user);
     }
 
     componentDidMount()
     {
-        let url = "http://" + window.location.hostname + ":5000/delivery/getDeliveries";
-        console.log(url);
+        let url = "http://" + window.location.hostname + ":5000/delivery/getUserDeliveries/"+this.state.user.iduser;
 
         axios.get(url)
         .then(res => {
-            console.log("RES: ", res);
+
             if (res.data.success) {
                 
                 this.setState({query_state: res.data.success, deliveries: res.data.deliveries});
@@ -39,7 +36,6 @@ class ManageDelivery extends Component {
             console.log(`Error de servidor: ${err}`);
         });
 
-        console.log(this.state);
     }
 
     render() {

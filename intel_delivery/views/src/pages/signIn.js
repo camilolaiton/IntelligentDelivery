@@ -83,7 +83,6 @@ class signIn extends Component {
 
     const data = axios.get(url)
     .then(res => {
-        console.log("RES: ", res);
 
         if (res.data.success) {
 
@@ -96,7 +95,6 @@ class signIn extends Component {
             existent_user = true;
           }
 
-          console.log("El usuario existe");
         }
         else {
           console.log("No existe el usuario");
