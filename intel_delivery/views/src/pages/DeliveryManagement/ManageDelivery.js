@@ -11,15 +11,17 @@ class ManageDelivery extends Component {
         this.state = {
             query_state: false,
             deliveries: [],
-            user: this.props.location.state.user
+            user: this.props.location.state.user,
+            cancelMessage: '',
         }
 
+        this.cancelHandler = this.cancelHandler.bind(this);
     }
 
     componentDidMount()
     {
         let url = "http://" + window.location.hostname + ":5000/delivery/getUserDeliveries/"+this.state.user.iduser;
-
+        
         axios.get(url)
         .then(res => {
 
@@ -38,11 +40,17 @@ class ManageDelivery extends Component {
 
     }
 
+    cancelHandler (e) {
+        console.log("El pedido ha sido cancelado: ", e);
+        this.componentDidMount();
+        this.forceUpdate();
+    }
+
     render() {
         return (
             <React.Fragment>
                 <Menu user={this.state.user}/>
-                <DeliveryList deliveryData={this.state.deliveries} user={this.state.user}/>
+                <DeliveryList deliveryData={this.state.deliveries} user={this.state.user} action={this.cancelHandler}/>
             </React.Fragment>
         );
     }

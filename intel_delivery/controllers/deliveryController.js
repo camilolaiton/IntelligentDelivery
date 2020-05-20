@@ -104,4 +104,30 @@ controller.createDelivery = async (req, res) => {
     res.json({success: query_state, data: data});
 }
 
+controller.updateDelivery = async (req, res) => {
+    
+    var query_state = true;
+
+    const idDelivery = req.params.iddelivery;
+    const iddelivery_state = req.body.iddelivery_state;
+
+    const data = await delivery.update({
+        delivery_state_iddelivery_state: iddelivery_state
+    },
+    {
+        where: {
+            iddelivery: idDelivery
+        }
+    })
+    .then(function(data) {
+        return data;
+    })
+    .catch(err => {
+        query_state = false;
+        return err;
+    })
+
+    res.json({success: query_state, data: data});
+}
+
 module.exports = controller;

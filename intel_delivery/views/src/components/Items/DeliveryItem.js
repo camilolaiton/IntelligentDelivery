@@ -14,6 +14,7 @@ import blueGrey from '@material-ui/core/colors/blueGrey';
 import green from '@material-ui/core/colors/green';
 import blue from '@material-ui/core/colors/blue';
 import red from '@material-ui/core/colors/red';
+import grey from '@material-ui/core/colors/grey';
 import Box from '@material-ui/core/Box';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -22,6 +23,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -71,6 +73,9 @@ const styles = {
   deleteIcon: {
     color: red[500],
   },
+  iconCancelled: {
+    color: grey[500],
+  },
   dialog: {
     backgroundColor: fade(red[500], 0.40),
     borderRadius: 3,
@@ -93,10 +98,12 @@ class DeliveryItem extends Component {
       render: null,
       open: false,
       img: '',
+      cancelButtonActivated: true,
     }
 
     const delivery_type = this.props.delivery.delivery_type.delivery_type;
     
+    // Choosing an image
     if (delivery_type === 'comida') {
       this.state.img = comida;
     }
@@ -108,6 +115,25 @@ class DeliveryItem extends Component {
     }
   }
 
+  cancelDelivery(iddelivery) {
+    
+    let url = "http://" + window.location.hostname + ":5000/delivery/updateDelivery/" + iddelivery;
+    const data = { iddelivery_state:  7};
+    
+    axios.post(url, data)
+    .then(response => {
+      if (response.data.success) {
+        this.props.action(this.props.delivery.iddelivery);
+      }
+      else {
+        console.log("La entrega no pudo ser cancelada!");
+      }
+    })
+    .catch(err => {
+      console.log("Error 34: ", err);
+    });
+  }
+
   handleOpen = () => {
     this.setState({open: true});
   };
@@ -116,7 +142,8 @@ class DeliveryItem extends Component {
     this.setState({open: false});
 
     if (closed) {
-      console.log("Ha sido eliminado!");
+      // console.log("Ha sido eliminado!");
+      this.cancelDelivery(this.props.delivery.iddelivery);
     }
   };
 
@@ -152,15 +179,30 @@ class DeliveryItem extends Component {
                 </Typography>
               </CardContent>
               <div className={classes.controls}>
-                <IconButton aria-label="delete" onClick={this.handleOpen}>
-                    <DeleteIcon className={classes.deleteIcon}/>
-                </IconButton>
-                <IconButton aria-label="pay" component={Link} to={ { pathname: `/payment/${this.props.delivery.iddelivery}`, state: {delivery: this.props.delivery, user: this.props.user} } }>
-                    <PaymentIcon className={classes.payIcon}/>
-                </IconButton>
-                <IconButton aria-label="check">
-                    <CheckIcon className={classes.checkIcon}/>
-                </IconButton>
+                {this.props.delivery.delivery_state.iddelivery_state < 4
+                  ? (<IconButton aria-label="delete" onClick={this.handleOpen}>
+                        <DeleteIcon className={classes.deleteIcon}/>
+                    </IconButton>)
+                  : (<IconButton aria-label="delete" disabled>
+                        <DeleteIcon className={classes.iconCancelled}/>
+                    </IconButton>)
+                }
+                {this.props.delivery.delivery_state.iddelivery_state < 4
+                  ? (<IconButton aria-label="pay" component={Link} to={ { pathname: `/payment/${this.props.delivery.iddelivery}`, state: {delivery: this.props.delivery, user: this.props.user} } }>
+                        <PaymentIcon className={classes.payIcon}/>
+                    </IconButton>)
+                  : (<IconButton aria-label="pay" disabled>
+                        <PaymentIcon className={classes.iconCancelled}/>
+                    </IconButton>)
+                }
+                {this.props.delivery.delivery_state.iddelivery_state < 4
+                  ? (<IconButton aria-label="check">
+                        <CheckIcon className={classes.checkIcon}/>
+                    </IconButton>)
+                  : (<IconButton aria-label="check">
+                        <CheckIcon className={classes.iconCancelled}/>
+                    </IconButton>)
+                }
 
                 <Typography variant="overline" color="textPrimary" >
                   <Box fontWeight="fontWeightMedium" fontSize={16} letterSpacing={4} flexShrink={0}>

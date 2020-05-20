@@ -119,7 +119,7 @@ const DeliveryList = (props) => {
                 
                 <GridList >
                     {entregasFiltradas.map((delivery) => (
-                        <DeliveryItem key={delivery.iddelivery} delivery={delivery} user={gotten_user}/>
+                        <DeliveryItem key={delivery.iddelivery} delivery={delivery} user={gotten_user} action={props.action}/>
                     ))}
                 </GridList>
             </Container>
