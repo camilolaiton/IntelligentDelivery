@@ -132,6 +132,9 @@ const useStyles = makeStyles((theme) => ({
     fullList: {
       width: 'auto',
     },
+    profileName: {
+      marginRight: 15,
+    },
 }));
 
 const Menu = (props) => {
@@ -216,6 +219,10 @@ const Menu = (props) => {
 
                     <Typography className={classes.title} variant="overline" noWrap>
                         Intelligent Delivery
+                    </Typography>
+                    
+                    <Typography className={classes.profileName} variant="overline" noWrap>
+                        {`${props.user.firstName} ${props.user.lastName}`}
                     </Typography>
                     
                     <StyledBadge

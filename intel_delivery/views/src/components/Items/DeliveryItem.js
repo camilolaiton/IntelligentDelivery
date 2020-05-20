@@ -180,10 +180,10 @@ class DeliveryItem extends Component {
           aria-describedby="alert-dialog-slide-description"
           className={classes.dialog}
         >
-          <DialogTitle id="alert-dialog-slide-title">{`Seguro que quieres eliminar el domicilio?`}</DialogTitle>
+          <DialogTitle id="alert-dialog-slide-title">{`Seguro que quieres cancelar el domicilio?`}</DialogTitle>
           <DialogContent >
             <DialogContentText id="alert-dialog-slide-description">
-              Recuerda que una vez eliminado no podras recuperar su pedido.
+              Recuerda que una vez cancelado no podras recuperar tu pedido.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
