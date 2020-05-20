@@ -1,6 +1,14 @@
 // Exporting express
 const express = require('express');
 const app = express();
+const jwt = require('jsonwebtoken');
+const config = require('./config/config');
+const bodyParser = require('body-parser');
+
+// Configuring jwt
+app.set('llave', config.llave);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Configurar cabeceras y cors
 app.use((req, res, next) => {

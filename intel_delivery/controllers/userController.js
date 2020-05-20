@@ -3,6 +3,8 @@ const controller = {}
 // Import model
 var user = require('../models/userModel');
 var userType = require('../models/userTypeModel');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 controller.getAllUsers = async (req, res) => {
     
@@ -47,10 +49,27 @@ controller.getClientByUsername = async (req, res) => {
 
     var query_state = true;
 
+    console.log(req.params);
+
     const data = await user.findAll({
         include: [userType],
+        limit: 1,
         where: {
-            username: [req.params.username]
+            [Op.and]:[
+                {
+                [Op.or]:[
+                    {
+                        username: [req.params.username]
+                    },
+                    {
+                        email: [req.params.username]
+                    }
+                ]
+                },
+                {
+                    password: req.params.password
+                }
+            ]
         }
     })
     .then(function(data){

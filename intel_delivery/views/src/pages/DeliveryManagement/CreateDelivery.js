@@ -41,10 +41,11 @@ class CreateDelivery extends Component {
     render() {
 
         const { classes } = this.props;
+        const gotten_user = this.props.location.state.user;
 
         return (
             <React.Fragment>
-                <Menu />
+                <Menu user={gotten_user}/>
                 <main className={classes.layout}>
                     <Grid container direction="row" justify="center" alignItems="center">
                         <Typography component="h1" variant="overline" align="left" style={{marginTop: 10,}}>
@@ -55,7 +56,7 @@ class CreateDelivery extends Component {
                     </Grid>
                     <Grid container direction="row" justify="center" alignItems="center">
                         <Paper className={classes.paper} elevation={10}>
-                            <DeliveryForm />
+                            <DeliveryForm user={gotten_user}/>
                         </Paper>
                     </Grid>
                 </main>

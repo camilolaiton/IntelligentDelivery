@@ -22,7 +22,7 @@ function useBuscarEntrega(entregas) {
     
     React.useMemo(() => {
         const resultado = entregas.filter(entrega => {
-            return `${entrega.id} ${entrega.nombre} ${entrega.apellido} ${entrega.ciudad} ${entrega.descripcion} ${entrega.estado}`
+            return `${entrega.iddelivery} ${entrega.price} ${entrega.address1} ${entrega.country.contry_name} ${entrega.city} ${entrega.delivery_type.descrption} ${entrega.delivery_state.delivery_state}`
             .toLowerCase()
             .includes(query.toLowerCase());
         });
@@ -37,6 +37,7 @@ function useBuscarEntrega(entregas) {
 const DeliveryList = (props) => {
     
     const { query, setQuery, entregasFiltradas } = useBuscarEntrega(props.deliveryData);
+    const gotten_user = props.user;
 
     if (entregasFiltradas.length === 0) 
     {
@@ -66,7 +67,7 @@ const DeliveryList = (props) => {
                             </FormControl>
                         </Grid>
                         <Grid item xs={2}>
-                            <IconButton color="primary" aria-label="add to shopping cart" component={Link} to={'/createDelivery'}>
+                            <IconButton color="primary" aria-label="add to shopping cart" component={Link} to={{ pathname: '/createDelivery', state: {user: gotten_user}} }>
                                 <AddShoppingCartIcon style={{color: green[500],}}/>
                             </IconButton>
                         </Grid>
@@ -110,7 +111,7 @@ const DeliveryList = (props) => {
                         </FormControl>
                     </Grid>
                     <Grid item xs={2}>
-                        <IconButton color="primary" aria-label="add to shopping cart" component={Link} to={'/createDelivery'}>
+                        <IconButton color="primary" aria-label="add to shopping cart" component={Link} to={{ pathname: '/createDelivery', state: {user: gotten_user}} }>
                             <AddShoppingCartIcon style={{color: green[500],}}/>
                         </IconButton>
                     </Grid>
@@ -118,7 +119,7 @@ const DeliveryList = (props) => {
                 
                 <GridList >
                     {entregasFiltradas.map((delivery) => (
-                        <DeliveryItem key={delivery.id} delivery={delivery}/>
+                        <DeliveryItem key={delivery.iddelivery} delivery={delivery} user={gotten_user}/>
                     ))}
                 </GridList>
             </Container>

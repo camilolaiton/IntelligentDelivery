@@ -6,7 +6,7 @@ class DeliveryForm extends Component {
   render() {
       return (
         <React.Fragment>
-          <AddressForm/>
+          <AddressForm user={this.props.user}/>
           <Button 
               variant="contained"
               color="primary"

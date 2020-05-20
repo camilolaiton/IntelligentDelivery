@@ -27,6 +27,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const image = 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80';
+const comida = 'https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80';
+const iceCream = 'https://images.unsplash.com/photo-1501443762994-82bd5dace89a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80';
+
 // const theme = createMuiTheme();
 
 const styles = {
@@ -88,6 +92,19 @@ class DeliveryItem extends Component {
     this.state = {
       render: null,
       open: false,
+      img: '',
+    }
+
+    const delivery_type = this.props.delivery.delivery_type.delivery_type;
+    
+    if (delivery_type === 'comida') {
+      this.state.img = comida;
+    }
+    else if(delivery_type === 'ropa') {
+      this.state.img = image;
+    }
+    else {
+      this.state.img = iceCream;
     }
   }
 
@@ -112,27 +129,33 @@ class DeliveryItem extends Component {
             
           <CardMedia
               className={classes.cover}
-              image={this.props.delivery.img}
-              title={this.props.delivery.cliente}
+              image={this.state.img}
+              title={this.props.delivery.delivery_type.delivery_type}
           />
             
           <div className={classes.details}>
               <CardContent className={classes.content} >
                 <Typography component="h5" variant="h5">
-                    Cliente: {`${this.props.delivery.nombre} ${this.props.delivery.apellido}`}
+                    Precio: {`${this.props.delivery.price}`}
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                    Ciudad: {this.props.delivery.ciudad}
+                    Pais: {this.props.delivery.country.contry_name} Ciudad: {this.props.delivery.city}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                    Dirección principal: {this.props.delivery.address1}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                    Fecha de orden: {this.props.delivery.order_date}
                 </Typography>
                 <Typography variant="subtitle2" color="textSecondary">
-                    Descripción: {this.props.delivery.descripcion}
+                    Descripción: {this.props.delivery.delivery_type.description}
                 </Typography>
               </CardContent>
               <div className={classes.controls}>
                 <IconButton aria-label="delete" onClick={this.handleOpen}>
                     <DeleteIcon className={classes.deleteIcon}/>
                 </IconButton>
-                <IconButton aria-label="pay" component={Link} to={ { pathname: `/payment/${this.props.delivery.id}`, state: {delivery: this.props.delivery} } }>
+                <IconButton aria-label="pay" component={Link} to={ { pathname: `/payment/${this.props.delivery.iddelivery}`, state: {delivery: this.props.delivery, user: this.props.user} } }>
                     <PaymentIcon className={classes.payIcon}/>
                 </IconButton>
                 <IconButton aria-label="check">
@@ -141,7 +164,7 @@ class DeliveryItem extends Component {
 
                 <Typography variant="overline" color="textPrimary" >
                   <Box fontWeight="fontWeightMedium" fontSize={16} letterSpacing={4} flexShrink={0}>
-                    {this.props.delivery.estado}
+                    {this.props.delivery.delivery_state.delivery_state}
                   </Box>
                 </Typography>
               </div>
@@ -157,7 +180,7 @@ class DeliveryItem extends Component {
           aria-describedby="alert-dialog-slide-description"
           className={classes.dialog}
         >
-          <DialogTitle id="alert-dialog-slide-title">{`Seguro que quieres eliminar el domicilio de ${this.props.delivery.nombre}?`}</DialogTitle>
+          <DialogTitle id="alert-dialog-slide-title">{`Seguro que quieres eliminar el domicilio?`}</DialogTitle>
           <DialogContent >
             <DialogContentText id="alert-dialog-slide-description">
               Recuerda que una vez eliminado no podras recuperar su pedido.

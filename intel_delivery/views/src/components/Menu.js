@@ -89,7 +89,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Menu = () => {
+const Menu = (props) => {
+
+    console.log("FROM MENU: ", props.user);
 
     const classes = useStyles();
 
@@ -108,7 +110,7 @@ const Menu = () => {
       setState({ ...state, [anchor]: open });
     };
 
-    const list = (anchor) => (
+    const list = (anchor, user) => (
       <div
         className={clsx(classes.list, {
           [classes.fullList]: anchor === 'top' || anchor === 'bottom',
@@ -118,7 +120,7 @@ const Menu = () => {
         onKeyDown={toggleDrawer(anchor, false)}
       >
         <List>
-            <ListItem button key={'domicilios'} component={Link} to='/manage'>
+            <ListItem button key={'domicilios'} component={Link} to={{ pathname: '/manage', state: {user: props.user}} }>
               <ListItemIcon><AllInbox/></ListItemIcon>
               <ListItemText primary='Mis domicilios' />
             </ListItem>
@@ -162,7 +164,7 @@ const Menu = () => {
                     </IconButton>
 
                     <Drawer anchor='left' open={state['left']} onClose={toggleDrawer('left', false)}>
-                      {list('left')}
+                      {list('left', props.user)}
                     </Drawer>
 
                     <Avatar className={classes.shippingIcon}>

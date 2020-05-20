@@ -13,6 +13,6 @@ router.get('/getClients', userController.getClients);
 router.post('/createUser', userController.createUser);
 
 // [GET] https://localhost:5000/user/getClientByUsername
-router.get('/getClientByUsername/:username', userController.getClientByUsername);
+router.get('/getClientByUsername/:username/:password', userController.getClientByUsername);
 
 module.exports = router;

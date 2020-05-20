@@ -11,7 +11,8 @@ import HomeIcon from '@material-ui/icons/Home';
 
 export default function AddressForm(props) {
 
-  const existingData = (props.delivery !== undefined);
+  const existingDeliveryData = (props.delivery !== undefined);
+  const existingUserData = (props.user !== undefined);
 
   return (
     <React.Fragment>
@@ -30,7 +31,7 @@ export default function AddressForm(props) {
                 label="Primer Nombre"
                 fullWidth
                 autoComplete="fname"
-                value={existingData ? props.delivery.nombre : ''}
+                value={existingUserData ? props.user.firstName : ''}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -41,7 +42,7 @@ export default function AddressForm(props) {
                 label="Primer Apellido"
                 fullWidth
                 autoComplete="lname"
-                value={existingData ? props.delivery.apellido : ''}
+                value={existingUserData ? props.user.lastName : ''}
               />
             </Grid>
             <Grid item xs={12}>
@@ -52,7 +53,7 @@ export default function AddressForm(props) {
                 label="Dirección de linea 1"
                 fullWidth
                 autoComplete="billing address-line1"
-                value={existingData ? props.delivery.direccion1 : ''}
+                value={existingDeliveryData ? props.delivery.address1 : ''}
               />
             </Grid>
             <Grid item xs={12}>
@@ -62,7 +63,7 @@ export default function AddressForm(props) {
                 label="Dirección de linea 2"
                 fullWidth
                 autoComplete="billing address-line2"
-                value={existingData ? props.delivery.direccion2 : ''}
+                value={existingDeliveryData ? props.delivery.address2 : ''}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -73,7 +74,7 @@ export default function AddressForm(props) {
                 label="Ciudad"
                 fullWidth
                 autoComplete="billing address-level2"
-                value={existingData ? props.delivery.ciudad : ''}
+                value={existingDeliveryData ? props.delivery.city : ''}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -81,7 +82,7 @@ export default function AddressForm(props) {
                 id="state" 
                 name="state" 
                 label="Estado/Provincia/Región" 
-                value={existingData ? props.delivery.region : ''} 
+                value={existingDeliveryData ? props.delivery.region : ''} 
                 fullWidth 
               />
             </Grid>
@@ -93,7 +94,7 @@ export default function AddressForm(props) {
                 label="Zip / Código postal"
                 fullWidth
                 autoComplete="billing postal-code"
-                value={existingData ? props.delivery.codigoPostal : ''}
+                value={existingDeliveryData ? props.delivery.postal_code : ''}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -104,7 +105,7 @@ export default function AddressForm(props) {
                 label="Pais"
                 fullWidth
                 autoComplete="billing country"
-                value={existingData ? props.delivery.pais : ''}
+                value={existingDeliveryData ? props.delivery.country.contry_name : ''}
               />
             </Grid>
             <Grid item xs={12}>

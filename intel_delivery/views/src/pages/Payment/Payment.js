@@ -50,14 +50,14 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Dirección de traslado', 'Detalles de pago', 'Verifica tu orden'];
 
-function getStepContent(step, delivery) {
+function getStepContent(step, delivery, user) {
   switch (step) {
     case 0:
-      return <AddressForm delivery={delivery}/>;
+      return <AddressForm delivery={delivery} user={user}/>;
     case 1:
-      return <PaymentForm delivery={delivery}/>;
+      return <PaymentForm delivery={delivery} user={user}/>;
     case 2:
-      return <Review delivery={delivery}/>;
+      return <Review delivery={delivery} user={user}/>;
     default:
       throw new Error('Unknown step');
   }
@@ -67,6 +67,9 @@ export default function Checkout(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const delivery = props.location.state.delivery;
+  const user = props.location.state.user;
+
+  console.log("USER: ", user);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -78,7 +81,7 @@ export default function Checkout(props) {
 
   return (
     <React.Fragment>
-      <Menu />
+      <Menu user={user}/>
       <main className={classes.layout}>
         <Paper className={classes.paper} elevation={10}>
           <Typography component="h1" variant="h4" align="center">
@@ -95,7 +98,7 @@ export default function Checkout(props) {
             {activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Señor {`${delivery.nombre} ${delivery.apellido}`} gracias por tu orden.
+                  Señor(a) {`${user.firstName} ${user.lastName}`} gracias por tu orden.
                 </Typography>
                 <Typography variant="subtitle1">
                   Su numero de orden es #2001539. Hemos enviado un correo de confirmación para su orden, y
@@ -104,7 +107,7 @@ export default function Checkout(props) {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep, delivery)}
+                {getStepContent(activeStep, delivery, user)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>

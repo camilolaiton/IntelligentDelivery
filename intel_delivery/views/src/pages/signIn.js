@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles, createMuiTheme } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import blueGrey from '@material-ui/core/colors/blueGrey';
+import axios from 'axios';
+// import {getJwt} from '../helpers/jwt';
 
 // https://images.unsplash.com/photo-1561494270-744b7f2ff037?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80
 // https://images.unsplash.com/photo-1561284081-ebf6c977bbde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1446&q=80
@@ -57,6 +59,54 @@ const styles = {
 };
 
 class signIn extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      username_email: null,
+      password: null,
+    };
+  }
+
+  handleChange = (e) => {
+    this.setState({
+        [e.target.id]: e.target.value 
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    var existent_user = false;
+
+    let url = "http://" + window.location.hostname + ":5000/user/getClientByUsername/"+this.state.username_email+"/"+this.state.password;
+
+    const data = axios.get(url)
+    .then(res => {
+        console.log("RES: ", res);
+
+        if (res.data.success) {
+
+          if (res.data.client.length > 0) {
+            
+            this.props.history.push({
+              pathname: '/manage',
+              state: { user: res.data.client[0] }
+            });
+            existent_user = true;
+          }
+
+          console.log("El usuario existe");
+        }
+        else {
+          console.log("No existe el usuario");
+        }
+      })
+      .catch(err => {
+        console.log("No existe el usuario ", err);
+    });
+  }
+
   render() {
 
     const { classes } = this.props;
@@ -76,17 +126,18 @@ class signIn extends Component {
             <Typography variant="overline" display="block" gutterBottom>
               Intelligent Delivery ©
             </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} noValidate onSubmit={this.handleSubmit}>
               <TextField
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Dirección de correo"
+                id="username_email"
+                label="Nombre de usuario o dirección de correo"
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange = {this.handleChange}
               />
               <TextField
                 variant="outlined"
@@ -98,6 +149,7 @@ class signIn extends Component {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange = {this.handleChange}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
