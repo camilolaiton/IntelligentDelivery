@@ -29,7 +29,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const image = 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80';
 const comida = 'https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80';
-const iceCream = 'https://images.unsplash.com/photo-1501443762994-82bd5dace89a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80';
+const home = 'https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=753&q=80'
 
 // const theme = createMuiTheme();
 
@@ -38,7 +38,7 @@ const styles = {
     display: 'flex',
     border: 1,
     style: { width: '5rem', height: '5rem' },
-    margin: 5,
+    margin: 10,
     backgroundColor: blueGrey[50],
     'margin-left': '5%',
     width: "90%",
@@ -104,7 +104,7 @@ class DeliveryItem extends Component {
       this.state.img = image;
     }
     else {
-      this.state.img = iceCream;
+      this.state.img = home;
     }
   }
 
