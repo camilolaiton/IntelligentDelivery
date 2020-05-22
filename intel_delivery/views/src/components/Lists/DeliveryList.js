@@ -22,7 +22,7 @@ function useBuscarEntrega(entregas) {
     
     React.useMemo(() => {
         const resultado = entregas.filter(entrega => {
-            return `${entrega.iddelivery} ${entrega.price} ${entrega.address1} ${entrega.country.contry_name} ${entrega.city} ${entrega.delivery_type.descrption} ${entrega.delivery_state.delivery_state}`
+            return `${entrega.iddelivery} ${entrega.price} ${entrega.address1} ${entrega.country.contry_name} ${entrega.city} ${entrega.delivery_type.description} ${entrega.delivery_state.delivery_state}`
             .toLowerCase()
             .includes(query.toLowerCase());
         });
@@ -67,7 +67,7 @@ const DeliveryList = (props) => {
                             </FormControl>
                         </Grid>
                         <Grid item xs={2}>
-                            <IconButton color="primary" aria-label="add to shopping cart" component={Link} to={{ pathname: '/createDelivery', state: {user: gotten_user}} }>
+                            <IconButton color="primary" aria-label="create new delivery" component={Link} to={{ pathname: '/createDelivery', state: {user: gotten_user}} }>
                                 <AddShoppingCartIcon style={{color: green[500],}}/>
                             </IconButton>
                         </Grid>
@@ -101,7 +101,7 @@ const DeliveryList = (props) => {
                         <FormControl fullWidth>
                             <Input
                                 id="deliverySearch"
-                                placeholder={'Buscar por cliente, ciudad, descripción o entrega'}
+                                placeholder={'Buscar por precio, pais, ciudad, dirección, descripción o entrega'}
                                 value={query}
                                 startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
                                 onChange={(e) => {
@@ -111,7 +111,7 @@ const DeliveryList = (props) => {
                         </FormControl>
                     </Grid>
                     <Grid item xs={2}>
-                        <IconButton color="primary" aria-label="add to shopping cart" component={Link} to={{ pathname: '/createDelivery', state: {user: gotten_user}} }>
+                        <IconButton color="primary" aria-label="create new delivery" component={Link} to={{ pathname: '/createDelivery', state: {user: gotten_user}} }>
                             <AddShoppingCartIcon style={{color: green[500],}}/>
                         </IconButton>
                     </Grid>
