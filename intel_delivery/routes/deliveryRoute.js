@@ -9,8 +9,8 @@ router.get('/getDeliveries', deliveryController.getDeliveries);
 // [GET] https:localhost:5000/delivery/getUserDeliveries/:iduser
 router.get('/getUserDeliveries/:iduser', deliveryController.getUserDeliveries);
 
-// [GET] https:localhost:5000/delivery/createDelivery
-router.get('/createDelivery', deliveryController.createDelivery);
+// [POST] https:localhost:5000/delivery/createDelivery
+router.post('/createDelivery', deliveryController.createDelivery);
 
 // [POST] https:localhost:5000/delivery/updateDelivery/:iddelivery
 router.post('/updateDelivery/:iddelivery', deliveryController.updateDelivery);
