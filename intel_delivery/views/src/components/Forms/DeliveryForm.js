@@ -110,6 +110,7 @@ class DeliveryForm extends Component {
             ref="addressForm"
             />
           <Button 
+            id = "registrer_btn"
             variant="contained"
             color="primary"
             style={{display: 'flex', justifyContent: 'flex-end', padding: 10, }}
