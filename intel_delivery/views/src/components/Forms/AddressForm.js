@@ -12,7 +12,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
-import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import axios from 'axios';
 
@@ -136,16 +135,24 @@ class AddressForm extends Component {
     for (var attribute in this.state) {
       
       if (attribute === 'country' || attribute === 'iddelivery_type'){
-        this.state[attribute] = '1';
+        this.setState({
+          [attribute]: '1'
+        });
       }
       else if (attribute === 'firstName') {
-        this.state[attribute] = this.props.user.firstName;
+        this.setState({
+          [attribute]: this.props.user.firstName
+        });
       }
       else if (attribute === 'lastName') {
-        this.state[attribute] = this.props.user.lastName;
+        this.setState({
+          [attribute]: this.props.user.lastName
+        });
       }
       else if (attribute !== 'countries' && attribute !== 'deliveryTypes'){
-        this.state[attribute] = '';
+        this.setState({
+          [attribute]: ''
+        });
       }
 
       this.props.parentCallback(attribute, this.state[attribute]);
