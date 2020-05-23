@@ -22,7 +22,7 @@ function useBuscarEntrega(entregas) {
     
     React.useMemo(() => {
         const resultado = entregas.filter(entrega => {
-            return `${entrega.iddelivery} ${entrega.price} ${entrega.address1} ${entrega.country.contry_name} ${entrega.city} ${entrega.delivery_type.description} ${entrega.delivery_state.delivery_state}`
+            return `${entrega.address1} ${entrega.user.firstName} ${entrega.user.lastName} ${entrega.country.contry_name} ${entrega.city} ${entrega.delivery_state.delivery_state}`
             .toLowerCase()
             .includes(query.toLowerCase());
         });
@@ -57,7 +57,7 @@ const DeliveryList = (props) => {
                             <FormControl fullWidth>
                                 <Input
                                     id="deliverySearch"
-                                    placeholder={'Buscar por cliente, ciudad, descripción o entrega'}
+                                    placeholder={'Buscar por ciudad, país, dirección o estado del pedido...'}
                                     value={query}
                                     startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
                                     onChange={(e) => {
@@ -101,7 +101,7 @@ const DeliveryList = (props) => {
                         <FormControl fullWidth>
                             <Input
                                 id="deliverySearch"
-                                placeholder={'Buscar por precio, pais, ciudad, dirección, descripción o entrega'}
+                                placeholder={'Buscar por ciudad, país, dirección o estado del pedido...'}
                                 value={query}
                                 startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
                                 onChange={(e) => {

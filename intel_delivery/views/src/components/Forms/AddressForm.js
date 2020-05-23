@@ -17,14 +17,15 @@ class AddressForm extends Component {
     this.state = {
       existingUserData: (this.props.user !== undefined),
       existingDeliveryData: (this.props.delivery !== undefined),
-      firstName: '',
-      lastName: '',
+      firstName: this.props.user.firstName,
+      lastName: this.props.user.lastName,
       address1: '',
       address2: '',
       city: '',
       region: '',
       postal_code: '',
       country: '',
+      description: '',
     }
 
     if (this.state.existingUserData) {
@@ -39,6 +40,7 @@ class AddressForm extends Component {
       this.state.region = this.props.delivery.region;
       this.state.postal_code = this.props.delivery.postal_code;
       this.state.country = this.props.delivery.country.contry_name;
+      this.state.description = this.props.delivery.country.description;
     }
   
   }

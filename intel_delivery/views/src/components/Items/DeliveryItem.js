@@ -66,6 +66,8 @@ const styles = {
     height: 38,
     width: 38,
     color: green[500],
+    paddingLeft: 5,
+    paddingRigth: 5,
   },
   payIcon: {
     color: blue[500],
@@ -74,10 +76,26 @@ const styles = {
     color: red[500],
   },
   iconCancelled: {
+    height: 30,
+    width: 30,
     color: grey[500],
+    paddingLeft: 5,
+    paddingRigth: 5,
+  },
+  iconDeliveryCancelled: {
+    height: 30,
+    width: 30,
+    color: red[500],
+    paddingLeft: 5,
+    paddingRigth: 5,
   },
   dialog: {
     backgroundColor: fade(red[500], 0.40),
+    borderRadius: 3,
+    border: 0,
+  },
+  dialogSuccess: {
+    backgroundColor: fade(green[500], 0.40),
     borderRadius: 3,
     border: 0,
   },
@@ -86,7 +104,10 @@ const styles = {
   },
   dialogDeleteButton: {
     color: red[500],
-  }
+  },
+  dialogDeliverButton: {
+    color: green[500],
+  },
 };
 
 class DeliveryItem extends Component {
@@ -96,7 +117,8 @@ class DeliveryItem extends Component {
     super(props);
     this.state = {
       render: null,
-      open: false,
+      openCancelDialog: false,
+      openDeliveryDialog: false,
       img: '',
       cancelButtonActivated: true,
     }
@@ -134,16 +156,44 @@ class DeliveryItem extends Component {
     });
   }
 
-  handleOpen = () => {
-    this.setState({open: true});
+  deliverDelivery(iddelivery) {
+    
+    let url = "http://" + window.location.hostname + ":5000/delivery/updateDelivery/" + iddelivery;
+    const data = { iddelivery_state:  6};
+    
+    axios.post(url, data)
+    .then(response => {
+      if (response.data.success) {
+        this.props.action(this.props.delivery.iddelivery);
+      }
+      else {
+        console.log("La entrega fue entregada con exito!");
+      }
+    })
+    .catch(err => {
+      console.log("Error 34: ", err);
+    });
+  }
+
+  handleOpen = (openTypeDialog) => {
+    this.setState({[openTypeDialog]: true});
+    console.log(this.state);
   };
 
-  handleClose = (closed) => {
-    this.setState({open: false});
+  handleClose = (closeTypeDialog, closed) => {
+    
+    this.setState({[closeTypeDialog]: false});
 
-    if (closed) {
-      // console.log("Ha sido eliminado!");
+    console.log(this.state);
+
+    if (closed && closeTypeDialog === 'openCancelDialog') {
+      // console.log("Ha sido cancelado!");
       this.cancelDelivery(this.props.delivery.iddelivery);
+    }
+    
+    if (closed && closeTypeDialog === 'openDeliveryDialog'){
+      //console.log("Ha sido entregado su pedido!");
+      this.deliverDelivery(this.props.delivery.iddelivery);
     }
   };
 
@@ -162,6 +212,14 @@ class DeliveryItem extends Component {
             
           <div className={classes.details}>
               <CardContent className={classes.content} >
+
+                {this.props.user.iduser === 1
+                  ? (<Typography component="h5" variant="h5">
+                      Cliente: {`${this.props.delivery.user.firstName} ${this.props.delivery.user.lastName}`}
+                    </Typography>)
+                  : ('')
+                }
+
                 <Typography component="h5" variant="h5">
                     Precio: {`${this.props.delivery.price}`}
                 </Typography>
@@ -180,7 +238,7 @@ class DeliveryItem extends Component {
               </CardContent>
               <div className={classes.controls}>
                 {this.props.delivery.delivery_state.iddelivery_state < 4
-                  ? (<IconButton aria-label="delete" onClick={this.handleOpen}>
+                  ? (<IconButton aria-label="delete" onClick={() => this.handleOpen('openCancelDialog')}>
                         <DeleteIcon className={classes.deleteIcon}/>
                     </IconButton>)
                   : (<IconButton aria-label="delete" disabled>
@@ -195,29 +253,43 @@ class DeliveryItem extends Component {
                         <PaymentIcon className={classes.iconCancelled}/>
                     </IconButton>)
                 }
-                {this.props.delivery.delivery_state.iddelivery_state < 4
-                  ? (<IconButton aria-label="check">
-                        <CheckIcon className={classes.checkIcon}/>
-                    </IconButton>)
-                  : (<IconButton aria-label="check">
-                        <CheckIcon className={classes.iconCancelled}/>
-                    </IconButton>)
+                
+                {this.props.user.iduser === 1 //CORREGIR ACA LA PARTE DEL USUARIO ADMIN
+                  ? (
+                      this.props.delivery.delivery_state.delivery_state === 'entregado' || this.props.delivery.delivery_state.delivery_state === 'cancelado'
+                      ? (<IconButton aria-label="check" disabled>
+                            <CheckIcon className={classes.iconCancelled}/>
+                        </IconButton>)
+                      : (<IconButton aria-label="check" onClick={() => this.handleOpen('openDeliveryDialog')}>
+                            <CheckIcon className={classes.checkIcon}/>
+                        </IconButton>)
+                    )
+                  : (
+                      this.props.delivery.delivery_state.delivery_state === 'entregado'
+                      ? (<CheckIcon className={classes.checkIcon}/>)
+                      : (this.props.delivery.delivery_state.delivery_state === 'cancelado'
+                          ? (<CheckIcon className={classes.iconDeliveryCancelled}/>)
+                          : (<CheckIcon className={classes.iconCancelled}/>)
+                        )
+                    )
                 }
 
                 <Typography variant="overline" color="textPrimary" >
-                  <Box fontWeight="fontWeightMedium" fontSize={16} letterSpacing={4} flexShrink={0}>
+                  <Box fontWeight="fontWeightMedium" fontSize={16} letterSpacing={4} flexShrink={0} style={{paddingLeft: 10}}>
                     {this.props.delivery.delivery_state.delivery_state}
                   </Box>
                 </Typography>
               </div>
           </div>
         </Card>
+        
+        {/* Dialog for delivery cancel*/}
 
         <Dialog
-          open={this.state.open}
+          open={this.state.openCancelDialog}
           TransitionComponent={Transition}
           keepMounted
-          onClose={ () => this.handleClose(false)}
+          onClose={ () => this.handleClose('openCancelDialog', false)}
           aria-labelledby="alert-dialog-slide-title"
           aria-describedby="alert-dialog-slide-description"
           className={classes.dialog}
@@ -229,11 +301,39 @@ class DeliveryItem extends Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => this.handleClose(false)} className={classes.dialogCancelButton}>
+            <Button onClick={() => this.handleClose('openCancelDialog', false)} className={classes.dialogCancelButton}>
               Cancelar
             </Button>
-            <Button onClick={() => this.handleClose(true)} className={classes.dialogDeleteButton}>
+            <Button onClick={() => this.handleClose('openCancelDialog', true)} className={classes.dialogDeleteButton}>
               Eliminar
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        {/* Dialog for deliver the delivery */}
+
+        <Dialog
+          open={this.state.openDeliveryDialog}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={ () => this.handleClose('openDeliveryDialog', false)}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+          className={classes.dialogSuccess}
+        >
+          <DialogTitle id="alert-dialog-slide-title">{`Seguro que quieres marcar como entregado el domicilio?`}</DialogTitle>
+          <DialogContent >
+            <DialogContentText id="alert-dialog-slide-description">
+              Recuerda que una vez marcado como entregado, si quieres volver 
+              a marcarlo en el estado anterior deberas comunicarte con soporte.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => this.handleClose('openDeliveryDialog', false)} className={classes.dialogCancelButton}>
+              Cancelar
+            </Button>
+            <Button onClick={() => this.handleClose('openDeliveryDialog', true)} className={classes.dialogDeliverButton}>
+              Entregar
             </Button>
           </DialogActions>
         </Dialog>

@@ -22,6 +22,10 @@ class ManageDelivery extends Component {
     {
         let url = "http://" + window.location.hostname + ":5000/delivery/getUserDeliveries/"+this.state.user.iduser;
         
+        if (this.state.user.iduser === 1) {
+            url = "http://" + window.location.hostname + ":5000/delivery/getDeliveries/"
+        }
+
         axios.get(url)
         .then(res => {
 
@@ -41,7 +45,7 @@ class ManageDelivery extends Component {
     }
 
     cancelHandler (e) {
-        console.log("El pedido ha sido cancelado: ", e);
+        console.log(`El pedido ${e} ha sido cancelado o entregado`);
         this.componentDidMount();
         this.forceUpdate();
     }
