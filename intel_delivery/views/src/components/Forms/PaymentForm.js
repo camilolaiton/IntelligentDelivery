@@ -12,6 +12,12 @@ export default function PaymentForm() {
         Método de pago
       </Typography>
       <Grid container spacing={3}>
+      <Grid item xs={12} md={6}>
+          <TextField required id="firstName" label="Nombre del propietario de tarjeta" fullWidth />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField required id="lastName" label="Apellido del propietario de tarjeta" fullWidth />
+        </Grid>
         <Grid item xs={12} md={6}>
           <TextField required id="cardNumber" label="Número de tu tarjeta" fullWidth />
         </Grid>
