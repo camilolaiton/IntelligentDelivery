@@ -13,13 +13,13 @@ export default function PaymentForm() {
       </Typography>
       <Grid container spacing={3}>
       <Grid item xs={12} md={6}>
-          <TextField required id="firstName" label="Nombre del propietario de tarjeta" fullWidth />
+          <TextField required id="firstName" label="Nombre del propietario" fullWidth />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField required id="lastName" label="Apellido del propietario de tarjeta" fullWidth />
+          <TextField required id="lastName" label="Apellido del propietario" fullWidth />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField required id="cardNumber" label="Número de tu tarjeta" fullWidth />
+          <TextField required id="cardNumber" label="Número de la tarjeta" fullWidth />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField required id="expDate" label="Fecha de expiración" fullWidth />

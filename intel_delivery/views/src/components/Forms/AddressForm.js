@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles, createMuiTheme } from '@material-ui/core/styles';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import PropTypes from 'prop-types';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
@@ -22,7 +23,7 @@ const styles = {
     flexGrow: 1,
   },
   formControl: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
     minWidth: 120,
   },
   selectEmpty: {
@@ -130,6 +131,28 @@ class AddressForm extends Component {
     this.props.parentCallback(e.target.id, e.target.value);
   };
 
+  cleanState () {
+    
+    for (var attribute in this.state) {
+      
+      if (attribute === 'country' || attribute === 'iddelivery_type'){
+        this.state[attribute] = '1';
+      }
+      else if (attribute === 'firstName') {
+        this.state[attribute] = this.props.user.firstName;
+      }
+      else if (attribute === 'lastName') {
+        this.state[attribute] = this.props.user.lastName;
+      }
+      else if (attribute !== 'countries' && attribute !== 'deliveryTypes'){
+        this.state[attribute] = '';
+      }
+
+      this.props.parentCallback(attribute, this.state[attribute]);
+    }
+
+  }
+
   render() {
 
     const { classes } = this.props;
@@ -232,43 +255,43 @@ class AddressForm extends Component {
           </Grid>
           <Grid item xs>
             <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="country-native-simple">País</InputLabel>
-              <Select
-                native
-                id="country"
-                value={this.state.country}
-                onChange={this.handleChange}
-                inputProps={{
-                  name: 'country',
-                  id: 'country',
-                }}
-                disabled={this.props.pay}
-              >
-                {this.state.countries.map((country) => (
-                  <option key={`${country.idcountry}`} value={`${country.idcountry}`}>{`${country.contry_name.toUpperCase()}`}</option>
-                ))}
-              </Select>
+                <Select
+                  native
+                  id="country"
+                  value={this.state.country}
+                  onChange={this.handleChange}
+                  inputProps={{
+                    name: 'country',
+                    id: 'country',
+                  }}
+                  disabled={this.props.pay}
+                >
+                  {this.state.countries.map((country) => (
+                    <option key={`${country.idcountry}`} value={`${country.idcountry}`}>{`${country.contry_name.toUpperCase()}`}</option>
+                  ))}
+                </Select>
+              <FormHelperText>País</FormHelperText>
             </FormControl>
           </Grid>
 
           <Grid item xs>
             <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="deliveryType-native-simple">Tipo de entrega</InputLabel>
-              <Select
-                native
-                id="iddelivery_type"
-                value={this.state.iddelivery_type}
-                onChange={this.handleChange}
-                inputProps={{
-                  name: 'iddelivery_type',
-                  id: 'iddelivery_type',
-                }}
-                disabled={this.props.pay}
-              >
-                {this.state.deliveryTypes.map((deliveryType) => (
-                  <option key={`${deliveryType.iddelivery_type}`} value={`${deliveryType.iddelivery_type}`}>{`${deliveryType.delivery_type.toUpperCase()}`}</option>
-                ))}
-              </Select>
+                <Select
+                  native
+                  id="iddelivery_type"
+                  value={this.state.iddelivery_type}
+                  onChange={this.handleChange}
+                  inputProps={{
+                    name: 'iddelivery_type',
+                    id: 'iddelivery_type',
+                  }}
+                  disabled={this.props.pay}
+                >
+                  {this.state.deliveryTypes.map((deliveryType) => (
+                    <option key={`${deliveryType.iddelivery_type}`} value={`${deliveryType.iddelivery_type}`}>{`${deliveryType.delivery_type.toUpperCase()}`}</option>
+                  ))}
+                </Select>
+              <FormHelperText>Tipo de entrega</FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={12}>

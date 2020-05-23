@@ -29,6 +29,8 @@ class DeliveryForm extends Component {
     
     if (typeDialog) {
       this.refs.dialogSuccess.handleOpen();
+      this.refs.addressForm.cleanState();
+      this.forceUpdate();
     }
     else {
       this.refs.dialogFail.handleOpen();
@@ -101,7 +103,12 @@ class DeliveryForm extends Component {
   render() {
       return (
         <React.Fragment>
-          <AddressForm user={this.props.user} parentCallback={this.getChildDataCallback} pay={false}/>
+          <AddressForm 
+            user={this.props.user} 
+            parentCallback={this.getChildDataCallback} 
+            pay={false}
+            ref="addressForm"
+            />
           <Button 
             variant="contained"
             color="primary"
