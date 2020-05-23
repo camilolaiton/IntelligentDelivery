@@ -19,8 +19,9 @@ class DeliveryForm extends Component {
       city: '',
       region: '',
       postal_code: '',
-      country: '',
+      country: '1',
       description: '',
+      iddelivery_type: '1',
     }
   }
 
@@ -65,8 +66,8 @@ class DeliveryForm extends Component {
         deliver_date: null,
         region: this.state.region,
         city: this.state.city,
-        idcountry: 1, // this.state.country,
-        iddelivery_type: 3, // I have to change it
+        idcountry: parseInt(this.state.country),
+        iddelivery_type: parseInt(this.state.iddelivery_type), // I have to change it
         iduser: this.props.user.iduser,
         iddelivery_state: 1,
       }
@@ -94,12 +95,13 @@ class DeliveryForm extends Component {
 
   getChildDataCallback = (targetState, targetValue) => {
     this.setState({[targetState]: targetValue});
+    console.log(`PADRE: ${targetState} ${targetValue}`);
   }
 
   render() {
       return (
         <React.Fragment>
-          <AddressForm user={this.props.user} parentCallback={this.getChildDataCallback} />
+          <AddressForm user={this.props.user} parentCallback={this.getChildDataCallback} pay={false}/>
           <Button 
             variant="contained"
             color="primary"

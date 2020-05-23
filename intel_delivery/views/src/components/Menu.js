@@ -171,21 +171,26 @@ const Menu = (props) => {
               <ListItemText primary='Mis domicilios' />
             </ListItem>
 
-            <ListItem button key={'Sección de ventas'} component={Link} to='/sells'>
-              <ListItemIcon><LocalAtm/></ListItemIcon>
-              <ListItemText primary='Sección de ventas' />
-            </ListItem>
+            {
+              /* 
+                <ListItem button key={'Sección de ventas'} component={Link} to='/sells'>
+                  <ListItemIcon><LocalAtm/></ListItemIcon>
+                  <ListItemText primary='Sección de ventas' />
+                </ListItem> 
+              */
+            }
         </List>
-
-        <Divider />
-
-        <List>
-
+        {
+          /*
             <ListItem button key={'Perfil'} component={Link} to='/profile'>
               <ListItemIcon><AccountCircle/></ListItemIcon>
               <ListItemText primary='Perfil' />
             </ListItem>
+          */
+        }
+        <Divider />
 
+        <List>
             <ListItem button key={'Cerrar sesión'} component={Link} to='/'>
               <ListItemIcon><ExitToApp/></ListItemIcon>
               <ListItemText primary='Cerrar sesión' />

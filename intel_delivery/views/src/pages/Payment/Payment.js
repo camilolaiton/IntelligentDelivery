@@ -50,14 +50,18 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Dirección de traslado', 'Detalles de pago', 'Verifica tu orden'];
 
+const getChildDataCallback = (targetState, targetValue) => {
+  console.log(`PADRE: ${targetState} ${targetValue}`);
+}
+
 function getStepContent(step, delivery, user) {
   switch (step) {
     case 0:
-      return <AddressForm delivery={delivery} user={user}/>;
+      return <AddressForm delivery={delivery} user={user} parentCallback={getChildDataCallback} pay={true}/>;
     case 1:
-      return <PaymentForm delivery={delivery} user={user}/>;
+      return <PaymentForm delivery={delivery} user={user} pay={true}/>;
     case 2:
-      return <Review delivery={delivery} user={user}/>;
+      return <Review delivery={delivery} user={user} pay={true}/>;
     default:
       throw new Error('Unknown step');
   }
