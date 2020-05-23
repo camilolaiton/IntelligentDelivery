@@ -167,7 +167,7 @@ class DeliveryItem extends Component {
         this.props.action(this.props.delivery.iddelivery);
       }
       else {
-        console.log("La entrega fue entregada con exito!");
+        console.log("La entrega no fue entregada con exito!");
       }
     })
     .catch(err => {
@@ -254,9 +254,9 @@ class DeliveryItem extends Component {
                     </IconButton>)
                 }
                 
-                {this.props.user.iduser === 1 //CORREGIR ACA LA PARTE DEL USUARIO ADMIN
+                {this.props.user.iduser === 1
                   ? (
-                      this.props.delivery.delivery_state.delivery_state === 'entregado' || this.props.delivery.delivery_state.delivery_state === 'cancelado'
+                      this.props.delivery.delivery_state.delivery_state === 'entregado' || this.props.delivery.delivery_state.delivery_state === 'cancelado' || this.props.delivery.delivery_state.delivery_state === 'pagado'
                       ? (<IconButton aria-label="check" disabled>
                             <CheckIcon className={classes.iconCancelled}/>
                         </IconButton>)
@@ -265,7 +265,7 @@ class DeliveryItem extends Component {
                         </IconButton>)
                     )
                   : (
-                      this.props.delivery.delivery_state.delivery_state === 'entregado'
+                      this.props.delivery.delivery_state.delivery_state === 'entregado' || this.props.delivery.delivery_state.delivery_state === 'pagado'
                       ? (<CheckIcon className={classes.checkIcon}/>)
                       : (this.props.delivery.delivery_state.delivery_state === 'cancelado'
                           ? (<CheckIcon className={classes.iconDeliveryCancelled}/>)

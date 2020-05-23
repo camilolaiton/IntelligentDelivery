@@ -118,7 +118,7 @@ class signIn extends Component {
 
     let url = "http://" + window.location.hostname + ":5000/user/getClientByUsername/"+this.state.username_email+"/"+this.state.password;
 
-    const data = axios.get(url)
+    axios.get(url)
     .then(res => {
 
         if (res.data.success) {

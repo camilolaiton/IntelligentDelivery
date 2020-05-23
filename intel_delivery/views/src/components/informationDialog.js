@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createMuiTheme, withStyles, fade } from '@material-ui/core/styles';
+import { withStyles, fade } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import red from '@material-ui/core/colors/red';
 import blue from '@material-ui/core/colors/blue';

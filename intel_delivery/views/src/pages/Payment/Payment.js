@@ -75,6 +75,27 @@ export default function Checkout(props) {
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+
+    if (activeStep === steps.length - 1) {
+      /*
+      let url = "http://" + window.location.hostname + ":5000/delivery/updateDelivery/" + delivery.iddelivery;
+      const data = { iddelivery_state:  8};
+      
+      axios.post(url, data)
+      .then(response => {
+        if (response.data.success) {
+          console.log("La entrega fue pagada con exito!");
+        }
+        else {
+          console.log("La entrega no fue pagada con exito!");
+        }
+      })
+      .catch(err => {
+        console.log("Error 34: ", err);
+      });
+      */
+     console.log("DESCOMENTAR ESTA SECCIÓN UNA VEZ SE TENGA EL TIPO 8 DE PAGADO EN BD")
+    }
   };
 
   const handleBack = () => {

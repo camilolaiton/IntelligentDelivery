@@ -282,18 +282,6 @@ class AddressForm extends Component {
     );
   }
 }
-{
-  /*<TextField
-                  required
-                  id="country"
-                  name="country"
-                  label="Pais"
-                  fullWidth
-                  autoComplete="billing country"
-                  value={this.state.country}
-                  onChange = {this.handleChange}
-                /> */
-}
 
 AddressForm.propTypes = {
   classes: PropTypes.object.isRequired,
