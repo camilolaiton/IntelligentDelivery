@@ -67,7 +67,7 @@ const DeliveryList = (props) => {
                             </FormControl>
                         </Grid>
                         <Grid item xs={2}>
-                            <IconButton color="primary" aria-label="create new delivery" component={Link} to={{ pathname: '/createDelivery', state: {user: gotten_user}} }>
+                            <IconButton id="create_delovery_btn" color="primary" aria-label="create new delivery" component={Link} to={{ pathname: '/createDelivery', state: {user: gotten_user}} }>
                                 <AddShoppingCartIcon style={{color: green[500],}}/>
                             </IconButton>
                         </Grid>
@@ -111,7 +111,7 @@ const DeliveryList = (props) => {
                         </FormControl>
                     </Grid>
                     <Grid item xs={2}>
-                        <IconButton color="primary" aria-label="create new delivery" component={Link} to={{ pathname: '/createDelivery', state: {user: gotten_user}} }>
+                        <IconButton id="create_delovery_btn" color="primary" aria-label="create new delivery" component={Link} to={{ pathname: '/createDelivery', state: {user: gotten_user}} }>
                             <AddShoppingCartIcon style={{color: green[500],}}/>
                         </IconButton>
                     </Grid>
