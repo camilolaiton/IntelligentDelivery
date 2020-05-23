@@ -246,10 +246,10 @@ class DeliveryItem extends Component {
                     </IconButton>)
                 }
                 {this.props.delivery.delivery_state.iddelivery_state < 4
-                  ? (<IconButton aria-label="pay" component={Link} to={ { pathname: `/payment/${this.props.delivery.iddelivery}`, state: {delivery: this.props.delivery, user: this.props.user} } }>
+                  ? (<IconButton id="pagarBtn" aria-label="pay" component={Link} to={ { pathname: `/payment/${this.props.delivery.iddelivery}`, state: {delivery: this.props.delivery, user: this.props.user} } }>
                         <PaymentIcon className={classes.payIcon}/>
                     </IconButton>)
-                  : (<IconButton aria-label="pay" disabled>
+                  : (<IconButton id="pagarBtn" aria-label="pay" disabled>
                         <PaymentIcon className={classes.iconCancelled}/>
                     </IconButton>)
                 }
@@ -257,10 +257,10 @@ class DeliveryItem extends Component {
                 {this.props.user.iduser === 1
                   ? (
                       this.props.delivery.delivery_state.delivery_state === 'entregado' || this.props.delivery.delivery_state.delivery_state === 'cancelado' || this.props.delivery.delivery_state.delivery_state === 'pagado'
-                      ? (<IconButton aria-label="check" disabled>
+                      ? (<IconButton id="entregarBtn" aria-label="check" disabled>
                             <CheckIcon className={classes.iconCancelled}/>
                         </IconButton>)
-                      : (<IconButton aria-label="check" onClick={() => this.handleOpen('openDeliveryDialog')}>
+                      : (<IconButton id="entregarBtn" aria-label="check" onClick={() => this.handleOpen('openDeliveryDialog')}>
                             <CheckIcon className={classes.checkIcon}/>
                         </IconButton>)
                     )

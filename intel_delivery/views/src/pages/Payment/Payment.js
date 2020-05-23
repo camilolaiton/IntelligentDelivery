@@ -133,11 +133,12 @@ export default function Checkout(props) {
                 {getStepContent(activeStep, delivery, user)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
+                    <Button id="volverBtn" onClick={handleBack} className={classes.button}>
                       Volver
                     </Button>
                   )}
                   <Button
+                    id="continuarBtn"
                     variant="contained"
                     color="primary"
                     onClick={handleNext}
