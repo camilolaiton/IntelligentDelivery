@@ -77,7 +77,7 @@ export default function Checkout(props) {
     setActiveStep(activeStep + 1);
 
     if (activeStep === steps.length - 1) {
-      /*
+      
       let url = "http://" + window.location.hostname + ":5000/delivery/updateDelivery/" + delivery.iddelivery;
       const data = { iddelivery_state:  8};
       
@@ -93,8 +93,6 @@ export default function Checkout(props) {
       .catch(err => {
         console.log("Error 34: ", err);
       });
-      */
-     console.log("DESCOMENTAR ESTA SECCIÓN UNA VEZ SE TENGA EL TIPO 8 DE PAGADO EN BD")
     }
   };
 
