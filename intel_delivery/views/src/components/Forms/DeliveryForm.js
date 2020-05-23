@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AddressForm from './AddressForm';
 import Button from '@material-ui/core/Button';
+import InformationDialog from '../informationDialog';
 import axios from 'axios';
 
 class DeliveryForm extends Component {
@@ -19,8 +20,25 @@ class DeliveryForm extends Component {
       region: '',
       postal_code: '',
       country: '',
+      description: '',
     }
   }
+
+  triggerChildDialog(typeDialog) {
+    
+    if (typeDialog) {
+      this.refs.dialogSuccess.handleOpen();
+    }
+    else {
+      this.refs.dialogFail.handleOpen();
+    }
+  }
+
+  handleChange = (e) => {
+    this.setState({
+        [e.target.id]: e.target.value 
+    });
+  };
 
   sendDelivery() {
     
@@ -28,26 +46,27 @@ class DeliveryForm extends Component {
 
     for (var attribute in this.state) {
 
-      if (this.state[attribute] === '') {
+      if (this.state[attribute] === '' && attribute !== 'address2' && attribute !== 'description') {
         filled_fields = false;
       }
     }
 
     if (filled_fields) {
-
+      console.log("PASO");
+      
       let url = "http://" + window.location.hostname + ":5000/delivery/createDelivery";
 
       const dataPost = {
         address1: this.state.address1,
         address2: this.state.address2,
-        postal_code: this.state.postal_code,
-        description: '',  // I have to change it
+        postal_code: parseInt(this.state.postal_code),
+        description: null,  // I have to change it
         order_date: '2020-05-17 11:39:36',
-        deliver_date: '',
+        deliver_date: null,
         region: this.state.region,
         city: this.state.city,
         idcountry: 1, // this.state.country,
-        iddelivery_type: 1, // I have to change it
+        iddelivery_type: 3, // I have to change it
         iduser: this.props.user.iduser,
         iddelivery_state: 1,
       }
@@ -58,10 +77,10 @@ class DeliveryForm extends Component {
         console.log(response);
 
         if (response.data.success) {
-          console.log("El pedido ha sido creado con exito!");
+          this.triggerChildDialog(true);
         }
         else {
-          console.log("No se puso crear ", response.data.data);
+          this.triggerChildDialog(false);
         }
       })
       .catch(err => {
@@ -69,7 +88,7 @@ class DeliveryForm extends Component {
       });
     }
     else {
-      console.log("Por favor, rellene los campos");
+      this.triggerChildDialog(false);
     }
   }
 
@@ -89,6 +108,19 @@ class DeliveryForm extends Component {
           >
               Registrar
           </Button>
+          <InformationDialog
+            ref="dialogSuccess"
+            dialogTitle={`${this.props.user.firstName} ${this.props.user.lastName}, su pedido ha sido creado exitosamente!`}
+            dialogInfo={'En su correo le enviaremos toda la información necesaria.'}
+            dialogType={'success'}
+          />
+
+          <InformationDialog
+            ref="dialogFail"
+            dialogTitle={`${this.props.user.firstName} ${this.props.user.lastName}, su pedido no ha podido ser creado.`}
+            dialogInfo={'Su pedido no pudo ser procesado.'}
+            dialogType={'fail'}
+          />
         </React.Fragment>
       );
     }

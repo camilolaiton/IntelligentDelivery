@@ -197,6 +197,7 @@ class signIn extends Component {
                   label="Recuerdame"
                 />
                 <Button
+                  id="signInBtn"
                   type="submit"
                   fullWidth
                   variant="contained"

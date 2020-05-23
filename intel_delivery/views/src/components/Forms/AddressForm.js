@@ -37,7 +37,7 @@ class AddressForm extends Component {
       this.state.address2 = this.props.delivery.address2;
       this.state.city = this.props.delivery.city;
       this.state.region = this.props.delivery.region;
-      this.state.postal_code = this.props.delivery.postalcode;
+      this.state.postal_code = this.props.delivery.postal_code;
       this.state.country = this.props.delivery.country.contry_name;
     }
   
