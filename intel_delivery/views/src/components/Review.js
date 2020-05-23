@@ -6,20 +6,23 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 
-const products = [
-  { name: 'Product 1', desc: 'A nice thing', price: '$9.99' },
-  { name: 'Product 2', desc: 'Another thing', price: '$3.45' },
-  { name: 'Product 3', desc: 'Something else', price: '$6.51' },
-  { name: 'Product 4', desc: 'Best thing of all', price: '$14.11' },
-  { name: 'Shipping', desc: '', price: 'Free' },
-];
-const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr/Ms John Smith' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
-];
+
+const getProducts = () => {
+  return [ { name: 'Costo por peso', desc: 'Existe un recargo por peso', price: '$12.000' },
+          { name: 'Costo por seguridad', desc: 'Seguridad del producto en caso de perdida', price: '$3.450' },
+          { name: 'Costo de entrega', desc: 'Entrega del producto', price: '$14.000' },
+          { name: 'Transporte', desc: 'Transporte del lugar de origen al destino', price: '$55.000' },
+          { name: 'Rastreo de producto', desc: '', price: 'Gratis' }, ]
+}
+
+const getPayments = (cardHolder) => {
+  return [
+    { name: 'Tipo de tarjeta', detail: 'Visa' },
+    { name: 'Propietario', detail: `Mr/Ms ${cardHolder.firstName} ${cardHolder.lastName}` },
+    { name: 'Número de tarjeta', detail: 'xxxx-xxxx-xxxx-1234' },
+    { name: 'Fecha expiración', detail: '04/2024' },
+  ];
+}
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -33,16 +36,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Review() {
+export default function Review(props) {
   const classes = useStyles();
 
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Order summary
+        Resumen de producto
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
+        {getProducts().map((product) => (
           <ListItem className={classes.listItem} key={product.name}>
             <ListItemText primary={product.name} secondary={product.desc} />
             <Typography variant="body2">{product.price}</Typography>
@@ -51,7 +54,7 @@ export default function Review() {
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" className={classes.total}>
-            $34.06
+            $84.450
           </Typography>
         </ListItem>
       </List>
@@ -60,15 +63,16 @@ export default function Review() {
           <Typography variant="h6" gutterBottom className={classes.title}>
             Traslado
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          <Typography gutterBottom>Repartidor: Federico Bustamante</Typography>
+          <Typography gutterBottom>{`Dirección 1: ${props.delivery.address1}`}</Typography>
+          <Typography gutterBottom>{`Dirección 2: ${props.delivery.address2}`}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
             Detalles de pago
           </Typography>
           <Grid container>
-            {payments.map((payment) => (
+            {getPayments(props.user).map((payment) => (
               <React.Fragment key={payment.name}>
                 <Grid item xs={6}>
                   <Typography gutterBottom>{payment.name}</Typography>

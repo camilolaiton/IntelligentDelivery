@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
+      width: 800,
       marginLeft: 'auto',
       marginRight: 'auto',
     },
@@ -124,8 +124,8 @@ export default function Checkout(props) {
                   Señor(a) {`${user.firstName} ${user.lastName}`} gracias por tu orden.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Su numero de orden es #2001539. Hemos enviado un correo de confirmación para su orden, y
-                  le enviaremos un correo de actualización cuando esta este en camino.
+                  Su numero de orden es #2001539. Hemos enviado un correo de confirmación para su orden 
+                  y además le enviaremos un correo de actualización cuando esta este en camino.
                 </Typography>
               </React.Fragment>
             ) : (
