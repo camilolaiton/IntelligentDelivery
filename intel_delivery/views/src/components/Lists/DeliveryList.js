@@ -16,10 +16,11 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import green from '@material-ui/core/colors/green';
 import DatePickerItem from '../Items/datePickerItem';
 
-function useBuscarEntrega(entregas, fecha) {
+function useBuscarEntrega(entregas, fechaInferior, fechaSuperior) {
     
     const [ query, setQuery ] = React.useState('');
-    const [ date, setDate ] = React.useState(fecha);
+    const [ inferiorDate, setInferiorDate ] = React.useState(fechaInferior);
+    const [ superiorDate, setSuperiorDate ] = React.useState(fechaSuperior);
     const [ entregasFiltradas, setEntregasFiltradas ] =  React.useState(entregas);
 
     React.useMemo(() => {
@@ -31,30 +32,40 @@ function useBuscarEntrega(entregas, fecha) {
             
             var tempDate = entrega.order_date.split('T')[0].split("-");
             tempDate = new Date(parseInt(tempDate[0]), parseInt(tempDate[1])-1, parseInt(tempDate[2]))
-            const searchDate = tempDate.getTime() < date.getTime(); //Para llegar hasta esta fecha
+            const searchDate = inferiorDate < tempDate.getTime() && tempDate.getTime() < superiorDate.getTime(); //Para llegar hasta esta fecha
             // console.log(`${tempDate} - ${date} - ${searchDate}`);
+            console.log(`${inferiorDate} // ${tempDate}  // ${superiorDate} /  ${searchDate}`);
             return searchQuery && searchDate;
         });
 
         setEntregasFiltradas(resultado);
 
-    }, [ entregas, query, date ]);
+    }, [ entregas, query, inferiorDate , superiorDate ]);
     
-    return { query, setQuery, setDate, entregasFiltradas }
+    return { query, setQuery, setInferiorDate, setSuperiorDate, entregasFiltradas }
 }
 
 const DeliveryList = (props) => {
     
-    const FIXED_DATE = new Date(2050, 4, 1);
-    const { query, setQuery, setDate, entregasFiltradas } = useBuscarEntrega(props.deliveryData, FIXED_DATE);
+    const FIXED_INFERIOR_DATE = new Date(2000, 4, 1);
+    const FIXED_SUPERIOR_DATE = new Date(2050, 4, 1);
+    const { query, setQuery, setInferiorDate, setSuperiorDate, entregasFiltradas } = useBuscarEntrega(props.deliveryData, FIXED_INFERIOR_DATE, FIXED_SUPERIOR_DATE);
     const gotten_user = props.user;
-
-    const getDataPicker = (data) => {
+    
+    const getInferiorDataPicker = (data) => {
         // var prueba = new Date(2020, 4, 1);
         // console.log(`${data}`);
         // console.log(`${prueba}`);
         // console.log(data.getTime() < prueba.getTime());
-        setDate(data);
+        setInferiorDate(data);
+    }
+    
+    const getSuperiorDataPicker = (data) => {
+        // var prueba = new Date(2020, 4, 1);
+        // console.log(`${data}`);
+        // console.log(`${prueba}`);
+        // console.log(data.getTime() < prueba.getTime());
+        setSuperiorDate(data);
     }
 
     return (
@@ -80,14 +91,18 @@ const DeliveryList = (props) => {
                                     setQuery(e.target.value);
 
                                     if (e.target.value === '') {
-                                        setDate(FIXED_DATE);
+                                        setInferiorDate(FIXED_INFERIOR_DATE);
+                                        setSuperiorDate(FIXED_SUPERIOR_DATE);
                                     }
                                 }}
                             />    
                         </FormControl>
                     </Grid>
                     <Grid item xs={2}>
-                        <DatePickerItem parentCallback={getDataPicker}/>
+                        <DatePickerItem parentCallback={getInferiorDataPicker} msg={'Seleccione fecha inical'} defaultValue={'2016-12-31'}/>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <DatePickerItem parentCallback={getSuperiorDataPicker} msg={'Seleccione fecha final'} defaultValue={'2022-12-31'}/>
                     </Grid>
                     <Grid item xs={2}>
                         <IconButton id="create_delovery_btn" color="primary" aria-label="create new delivery" component={Link} to={{ pathname: '/createDelivery', state: {user: gotten_user}} }>
