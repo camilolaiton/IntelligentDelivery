@@ -48,9 +48,9 @@ class datePickerItem extends Component {
                 <form className={classes.container}>
                     <TextField
                         id="datePicker"
-                        label="Selecciona fecha final"
+                        label={this.props.msg}
                         type="date"
-                        defaultValue="2022-12-31"
+                        defaultValue={this.props.defaultValue}
                         className={classes.textField}
                         onChange={(e) => this.handleChange(e)}
                         InputLabelProps={{
