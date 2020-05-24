@@ -121,10 +121,11 @@ class DeliveryItem extends Component {
       openDeliveryDialog: false,
       img: '',
       cancelButtonActivated: true,
+      parsedDate: this.props.delivery.order_date.split('T')[0].split("-"),
     }
 
     const delivery_type = this.props.delivery.delivery_type.delivery_type;
-    
+
     // Choosing an image
     if (delivery_type === 'comida') {
       this.state.img = comida;
@@ -230,7 +231,7 @@ class DeliveryItem extends Component {
                     Dirección principal: {this.props.delivery.address1}
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                    Fecha de orden: {this.props.delivery.order_date}
+                    Fecha de orden: {`${this.state.parsedDate[0]}/${this.state.parsedDate[1]}/${this.state.parsedDate[2]}`}
                 </Typography>
                 <Typography variant="subtitle2" color="textSecondary">
                     Descripción: {this.props.delivery.delivery_type.description}
