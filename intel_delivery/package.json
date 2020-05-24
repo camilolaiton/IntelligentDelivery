@@ -7,7 +7,7 @@
     "start": "npx nodemon App.js",
     "dev": "node App.js"
   },
-  "author": "Camilo Laiton",
+  "author": "Camilo Laiton and Cristian Vergel",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
