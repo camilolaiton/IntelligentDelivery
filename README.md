@@ -1,7 +1,7 @@
 # Intelligent Delivery
 
 ![GitHub top language](https://img.shields.io/github/languages/top/camilolaiton/IntelligentDelivery)
-[![npm version](https://badge.fury.io/js/npm.svg)](https://badge.fury.io/js/npm)
+![GitHub repo size](https://img.shields.io/github/repo-size/camilolaiton/IntelligentDelivery)
 [![npm version](https://badge.fury.io/js/react.svg)](https://badge.fury.io/js/react)
 [![npm version](https://badge.fury.io/js/node.svg)](https://badge.fury.io/js/node)
 [![npm version](https://badge.fury.io/js/sequelize.svg)](https://badge.fury.io/js/sequelize)
