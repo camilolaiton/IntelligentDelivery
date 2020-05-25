@@ -100,10 +100,10 @@ const DeliveryList = (props) => {
                         </FormControl>
                     </Grid>
                     <Grid item xs={2}>
-                        <DatePickerItem parentCallback={getInferiorDataPicker} msg={'Seleccione fecha inical'} defaultValue={'2016-12-31'}/>
+                        <DatePickerItem id= {"datePicker1"} parentCallback={getInferiorDataPicker} msg={'Seleccione fecha inical'} defaultValue={'2016-12-31'}/>
                     </Grid>
                     <Grid item xs={2}>
-                        <DatePickerItem parentCallback={getSuperiorDataPicker} msg={'Seleccione fecha final'} defaultValue={'2022-12-31'}/>
+                        <DatePickerItem id = {"datePicker2"} parentCallback={getSuperiorDataPicker} msg={'Seleccione fecha final'} defaultValue={'2022-12-31'}/>
                     </Grid>
                     <Grid item xs={2}>
                         <IconButton id="create_delovery_btn" color="primary" aria-label="create new delivery" component={Link} to={{ pathname: '/createDelivery', state: {user: gotten_user}} }>
