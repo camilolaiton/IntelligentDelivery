@@ -8,10 +8,6 @@
 
 Intelligent Delivery is a web page built with ReactJS, NodeJS and MySQL enabled for real-time order management with offline storage. Also, we implemented Selenium for web page testing.
 
-**Table of Contents**
-
-[TOCM]
-
 # Features
 
 + Administrator services
