@@ -1,6 +1,6 @@
 # Intelligent Delivery
 
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/camilolaiton/IntelligentDelivery?style=plastic)
+![GitHub top language](https://img.shields.io/github/languages/top/camilolaiton/IntelligentDelivery)
 [![npm version](https://badge.fury.io/js/npm.svg)](https://badge.fury.io/js/npm)
 [![npm version](https://badge.fury.io/js/react.svg)](https://badge.fury.io/js/react)
 [![npm version](https://badge.fury.io/js/node.svg)](https://badge.fury.io/js/node)
