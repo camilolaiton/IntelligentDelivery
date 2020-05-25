@@ -80,9 +80,9 @@ const DeliveryList = (props) => {
                         </Box>
                     </Typography>
                 </Grid>
-                <Grid container direction="row" justify="flex-start" alignItems="flex-start">
+                <Grid container direction="row" justify="flex-start" alignItems="flex-start" >
                     <Grid item xs={6}>
-                        <FormControl fullWidth>
+                        <FormControl fullWidth style={{marginTop: -3,}}>
                             <Input
                                 id="deliverySearch"
                                 placeholder={'Buscar por ciudad, país, dirección o estado del pedido...'}
@@ -96,13 +96,13 @@ const DeliveryList = (props) => {
                                         setSuperiorDate(FIXED_SUPERIOR_DATE);
                                     }
                                 }}
-                            />    
+                            />  
                         </FormControl>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={2} style={{marginTop: -19,}}>
                         <DatePickerItem id= {"datePicker1"} parentCallback={getInferiorDataPicker} msg={'Seleccione fecha inical'} defaultValue={'2016-12-31'}/>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={2} style={{marginTop: -19,}}>
                         <DatePickerItem id = {"datePicker2"} parentCallback={getSuperiorDataPicker} msg={'Seleccione fecha final'} defaultValue={'2022-12-31'}/>
                     </Grid>
                     <Grid item xs={2}>
