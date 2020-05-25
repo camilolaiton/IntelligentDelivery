@@ -47,7 +47,7 @@ class datePickerItem extends Component {
             <React.Fragment>
                 <form className={classes.container}>
                     <TextField
-                        id="datePicker"
+                        id = {this.props.id}
                         label={this.props.msg}
                         type="date"
                         defaultValue={this.props.defaultValue}
