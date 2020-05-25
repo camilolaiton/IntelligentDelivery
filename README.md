@@ -21,10 +21,19 @@ Intelligent Delivery is a web page built with ReactJS, NodeJS and MySQL enabled 
 	+ Pay an order (simulation)
 	+ Filter orders
 
-# Overview
+# How does the page look like?
 
 ## Login Page View
+
+![LoginView](https://raw.githubusercontent.com/camilolaiton/IntelligentDelivery/master/overview/loginOverview.png)
+
+> Intelligent Delivery Login view
+
 ## Manage Deliveries View
+
+![ManageOrdersView](https://raw.githubusercontent.com/camilolaiton/IntelligentDelivery/master/overview/manageOrdersOverview.png)
+
+> Intelligent Delivery Manage Orders view
 
 #  Deployment diagram
 This web page is built with NodeJs for the backend development, ReactJS for frontend and Sequelize as the ORM. Also, Material-UI is a used framework in the frontend side.
