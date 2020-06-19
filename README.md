@@ -1,10 +1,11 @@
 # Intelligent Delivery
 
-![GitHub top language](https://img.shields.io/github/languages/top/camilolaiton/IntelligentDelivery)
-![GitHub repo size](https://img.shields.io/github/repo-size/camilolaiton/IntelligentDelivery)
+[![GitHub top language](https://img.shields.io/github/languages/top/camilolaiton/IntelligentDelivery)](https://github.com/camilolaiton/IntelligentDelivery)
+[![GitHub repo size](https://img.shields.io/github/repo-size/camilolaiton/IntelligentDelivery)](https://github.com/camilolaiton/IntelligentDelivery)
 [![npm version](https://badge.fury.io/js/react.svg)](https://badge.fury.io/js/react)
 [![npm version](https://badge.fury.io/js/node.svg)](https://badge.fury.io/js/node)
 [![npm version](https://badge.fury.io/js/sequelize.svg)](https://badge.fury.io/js/sequelize)
+[![Instagram](https://img.shields.io/static/v1?label=insta&logo=instagram&message=camilo_laiton&color=purple "camilo's insta")](https://www.instagram.com/camilo_laiton/ "profil")
 
 Intelligent Delivery is a web page built with ReactJS, NodeJS and MySQL enabled for real-time order management with offline storage. Also, we implemented Selenium for web page testing.
 
